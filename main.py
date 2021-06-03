@@ -1,4 +1,6 @@
-# 
+# Mejorar la interfaz
+# Añadir la racha
+# Manejar errores
 
 import random
 import os
@@ -21,9 +23,11 @@ def run():
 
 def game(word):
     attemps = 5
+    founds = 0
     hidden_word = []
     isHere = False
     hangmang = list(enumerate(word))
+
     for i in range(0, len(word)):
         hidden_word.append(' _')
 
@@ -31,18 +35,26 @@ def game(word):
         print(' _', end='')
     
     while attemps > 0:
-        letter = input('\nEscribe una letra: ')
-        #afirmacion: letter no puede ser un numero
-        for i in range(0, len(word)):
-            if letter == hangmang[i][1]:
-                hidden_word[i] = hangmang[i][1].upper()
-                isHere = True
-        os.system('cls')
-        print(''.join(hidden_word))
-        if isHere != True:
-            attemps = attemps - 1
+        if founds == len(word):
+            print('Felicidades haz ganado!')
+            return
         else:
-            isHere = False
+            letter = input('\nEscribe una letra: ')
+            #afirmacion: letter no puede ser un numero
+            for i in range(0, len(word)):
+                if letter == hangmang[i][1]:
+                    hidden_word[i] = hangmang[i][1].upper()
+                    founds += 1
+                    isHere = True
+            os.system('cls')
+            print(''.join(hidden_word))
+            if isHere != True:
+                attemps = attemps - 1
+            else:
+                isHere = False
+    
+    if attemps == 0:
+        print(f'Lo siento haz perdido la palabra era {word}')
            
 
 if __name__ == '__main__':
