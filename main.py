@@ -1,6 +1,8 @@
 # 
 
 import random
+import os
+
 n_words = 171
 random_words = []
 random_lines = [random.randint(1, n_words) for i in range(1, 4)]
@@ -35,6 +37,7 @@ def game(word):
             if letter == hangmang[i][1]:
                 hidden_word[i] = hangmang[i][1].upper()
                 isHere = True
+        os.system('cls')
         print(''.join(hidden_word))
         if isHere != True:
             attemps = attemps - 1
